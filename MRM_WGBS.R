@@ -13,7 +13,7 @@ library(nnls)
 
 
 # 1.load and format annotated WGBS data #######
-df1 = read.table('./df_beta_3_annot_N=19.txt', header=T, sep='\t', stringsAsFactors=F)
+df1 = read.table('./df_beta_3_annot_N19_eg.txt', header=T, sep='\t', stringsAsFactors=F)
 
 #head(df1)
 df1$region = df1$tss0
