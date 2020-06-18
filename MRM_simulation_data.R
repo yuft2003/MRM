@@ -304,34 +304,6 @@ for(m in 1:M){
 
 
 
-cc=data.frame(cor_region=NA,  cor_ws=NA, cor_knn=NA)
-for(n in 1:N){
-  dft1= xxdf[which(xxdf$subj==n),]
-  dft2 = dft1[which(dft1$train==0),]
-  cc[n,'cor_region'] = cor(dft2$y, dft2$y_hat)
-  
-  cc[n,'cor_ws'] = cor(dft2$y, dft2$y_hat_3)
-  cc[n,'cor_knn'] = cor(dft2$y, dft2$y_hat_knn)
-  
-}  
-#cc
-#mean(cc$cor_region)
-#mean(cc$cor_knn)
-#var(cc$cor_region)
-#var(cc$cor_knn)
-#cc_knn=cc
-
-
-rr=data.frame(rmse_region=NA,  rmse_ws=NA, rmse_knn=NA)
-for(n in 1:N){
-  dft1= xxdf[which(xxdf$subj==n),]
-  dft2 = dft1[which(dft1$train==0),]
-  rr[n,'rmse_region'] = rmse(dft2$y, dft2$y_hat)
-  rr[n,'rmse_ws'] = rmse(dft2$y, dft2$y_hat_3)
-  rr[n,'rmse_knn'] = rmse(dft2$y, dft2$y_hat_knn)
-}  
-rr_knn = rr
-
 
 #.2 weighted average of one upsteam and one downstream ################
 
@@ -378,35 +350,6 @@ for(n in 1:N){
 }
 
 
-cc=data.frame(cor_region=NA,  cor_ws=NA, cor_upd=NA)
-for(n in 1:N){
-  dft1= dfupd.l2[[n]]
-  dft2 = dft1[which(dft1$train==0),]
-  cc[n,'cor_region'] = cor(dft2$y, dft2$y_hat)
-  
-  cc[n,'cor_ws'] = cor(dft2$y, dft2$y_hat_3)
-  cc[n,'cor_upd'] = cor(dft2$y, dft2$y_hat_upd, use='complete.obs')
-  
-}  
-
-
-rr=data.frame(rmse_region=NA,  rmse_ws=NA, rmse_upd=NA)
-for(n in 1:N){
-  dft1= dfupd.l2[[n]]
-  dft2 = dft1[which(dft1$train==0),]
-  rr[n,'rmse_region'] = rmse(dft2$y, dft2$y_hat)
-  
-  rr[n,'rmse_ws'] = rmse(dft2$y, dft2$y_hat_3)
-  
-  if(length(which(is.na(dft2$y)|(is.na(dft2$y_hat_upd))))>0){
-    rr[n,'rmse_upd'] = rmse(dft2$y[-which(is.na(dft2$y)|(is.na(dft2$y_hat_upd)))], dft2$y_hat_upd[-which(is.na(dft2$y)|(is.na(dft2$y_hat_upd)))])
-  }else{
-    rr[n,'rmse_upd'] = rmse(dft2$y, dft2$y_hat_upd)
-  }
-  
-  
-}  
-rr_upd = rr
 
 
 
@@ -467,34 +410,6 @@ dfrf.l2<- foreach(n=1:N, .packages = c('data.table', 'randomForest') ) %dopar%{
 }
 
 
-
-cc=data.frame(cor_region=NA,  cor_ws=NA, cor_rf=NA)
-for(n in 1:N){
-  dft1= dfrf.l2[[n]]
-  dft2 = dft1[which(dft1$train==0),]
-  cc[n,'cor_region'] = cor(dft2$y, dft2$y_hat)
-  
-  cc[n,'cor_ws'] = cor(dft2$y, dft2$y_hat_3)
-  cc[n,'cor_rf'] = cor(dft2$y, dft2$y_hat_rf, use='complete.obs')
-  
-}  
-
-
-
-rr=data.frame(rmse_region=NA,  rmse_ws=NA, rmse_rf=NA)
-for(n in 1:N){
-  dft1= dfrf.l2[[n]]
-  dft2 = dft1[which(dft1$train==0),]
-  rr[n,'rmse_region'] = rmse(dft2$y, dft2$y_hat)
-  
-  rr[n,'rmse_ws'] = rmse(dft2$y, dft2$y_hat_3)
-  
-  if(length(which(is.na(dft2$y)|(is.na(dft2$y_hat_rf))))>0){
-    rr[n,'rmse_rf'] = rmse(dft2$y[-which(is.na(dft2$y)|(is.na(dft2$y_hat_rf)))], dft2$y_hat_rf[-which(is.na(dft2$y)|(is.na(dft2$y_hat_rf)))])
-  }else{
-    rr[n,'rmse_rf'] = rmse(dft2$y, dft2$y_hat_rf)
-  }
-}  
 
 
 
