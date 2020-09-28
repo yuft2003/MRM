@@ -8,18 +8,18 @@ The in-house R script used for data analysis of our manuscript titled ‘A Novel
 
 ## Example
 ### Simulating data by MRM model
-  N = 20           #----number of subject
-  noise0.var = 0.2 #----variance of noise level
-  pctMi = 0.2      #----missing rate
-  I=50             #----number of CpGs per region
-  M=100            #----number of regions
-  K=4              # number of clusters of subjects
-  N_mu = 10        #---- # of rfb centers 
-  w =list()
-  mu = seq(-1,1,length.out=N_mu) #---- rfb centers 
-  gamma = -10
-  noise0.var=0.2
-  source(data_simulation.R)
+    N = 20           #----number of subject
+    noise0.var = 0.2 #----variance of noise level
+    pctMi = 0.2      #----missing rate
+    I=50             #----number of CpGs per region
+    M=100            #----number of regions
+    K=4              # number of clusters of subjects
+    N_mu = 10        #---- # of rfb centers 
+    w =list()
+    mu = seq(-1,1,length.out=N_mu) #---- rfb centers 
+    gamma = -10
+    noise0.var=0.2
+    source(data_simulation.R)
 
 
 ## Citation
