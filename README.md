@@ -30,10 +30,10 @@ Loading real WGBS data
 
 
 
-    N_cpg = nrow(df1)
-    I=200 #-----------------------------------------------dfsfsdfsdf
+    N_cpg = nrow(df1)   #--------total number of CpGs in the example dataframe
+    I=50                #--------number of CpGs per region
     M = floor(N_cpg/I)
-    N=19
+    N=19                #--------number of subjects
     regionID1 = c(rep(c(1:M), each = I), rep(NA, N_cpg%%I))
     subjID = names(df1)[2:20]
 
