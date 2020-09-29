@@ -20,7 +20,7 @@ Simulating data by MRM model
     gamma = -10
     noise0.var=0.2
     
-    source(data_simulation.R)
+    source('YOUR_PATH/data_simulation.R')
 
 Loading real WGBS data
     
