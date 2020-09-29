@@ -23,10 +23,38 @@ Simulating data by MRM model
     source(data_simulation.R)
 
 Loading real WGBS data
-
     
+    source('YOUR_PATH/functions.R')
+    df1 = read.table('G:/me_impute/code/githubTest/df_beta_3_annot_N19_Ncpg2000.txt',
+                 header=T, sep='\t', stringsAsFactors = F)
 
 
+
+    N_cpg = nrow(df1)
+    I=200 #-----------------------------------------------dfsfsdfsdf
+    M = floor(N_cpg/I)
+    N=19
+    regionID1 = c(rep(c(1:M), each = I), rep(NA, N_cpg%%I))
+    subjID = names(df1)[2:20]
+
+    df1$regionID1<-regionID1
+    regionID = 1:M
+    dfIn = df1
+    df=list()
+    for(m in 1:M){
+        df[[m]]=list()
+        for(n in 1:N){
+            df[[m]][[n]]=data.frame(POS=dfIn[which(dfIn$regionID1==regionID[m]),'start'], y=dfIn[which(dfIn$regionID1==regionID[m]),subjID[n]])
+            df[[m]][[n]]$x=scale01(df[[m]][[n]]$POS)
+            df[[m]][[n]]$subj=n
+            df[[m]][[n]]$region = m
+            df[[m]][[n]]$regionID = regionID[m]
+            if(length(which(is.na(df[[m]][[n]]$y)))>0){
+                df[[m]][[n]]=df[[m]][[n]][-which(is.na(df[[m]][[n]]$y)),]
+            }  
+         }
+    }
+    
 
 
 
@@ -45,6 +73,9 @@ Output
     3:   3 0.8150562 -0.7539769    1        1     1 0.8896063 0.6747196 0.8696888
     4:   4 0.7947416 -0.7513913    1        1     1 0.8897192 0.6743983 0.8697851
     5:   5 1.0000000 -0.6866021    1        1     1 0.8692463 0.6675884 0.8500715
+    ---
+    [[2]]
+    
 
 y_hat: imputed value by region model
 
