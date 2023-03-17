@@ -85,5 +85,5 @@ y_hat_3: imputed value by stack model
 
     
 ## Citation
-TBD
+https://pubmed.ncbi.nlm.nih.gov/33261550/
 
